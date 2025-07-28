@@ -1,6 +1,5 @@
+import { ThemeToggle } from '@/features';
 import zetaLogo from '/zeta.svg';
-
-import { ThemeToggle } from '@/components/theme-toggle/theme-toggle';
 
 const Header: React.FC = () => {
   return (

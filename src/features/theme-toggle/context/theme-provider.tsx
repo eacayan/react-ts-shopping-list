@@ -1,4 +1,4 @@
-import { ThemeContext } from '@/context/theme/theme-context';
+import { ThemeContext } from '@/features/theme-toggle/context/theme-context';
 import { useEffect, ReactNode } from 'react';
 import useLocalStorage from 'use-local-storage';
 

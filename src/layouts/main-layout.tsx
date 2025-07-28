@@ -1,5 +1,4 @@
-import { Header } from '@/components/header/header';
-import { Dashboard } from '@/features/dashboard/dashboard';
+import { Dashboard, Header } from '@/components';
 
 const MainLayout: React.FC = () => {
   return (

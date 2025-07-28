@@ -1,5 +1,5 @@
-import { ThemeProvider } from '@/context/theme/theme-provider';
-import { MainLayout } from '@/layouts/main-layout';
+import { ThemeProvider } from '@/features/theme-toggle/context/theme-provider';
+import { MainLayout } from '@/layouts';
 
 function App() {
   return (

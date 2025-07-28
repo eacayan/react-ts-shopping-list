@@ -1,4 +1,4 @@
-import { useTheme } from '@/components/theme-toggle/hooks/useTheme';
+import { useTheme } from '@/features/theme-toggle/hooks/useTheme';
 import { Switch } from 'antd';
 
 const ThemeToggle: React.FC = () => {
