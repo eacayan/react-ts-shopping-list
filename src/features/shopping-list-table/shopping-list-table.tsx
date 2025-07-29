@@ -1,4 +1,4 @@
-import { ShoppingListTableProps, ShoppingListTableRows } from '@/features/types';
+import { ShoppingListTableProps, ShoppingListFormInput } from '@/features/types';
 import {
   createColumnHelper,
   FilterFn,
@@ -11,7 +11,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { useMemo, useRef } from 'react';
 
-const columnHelper = createColumnHelper<ShoppingListTableRows>();
+const columnHelper = createColumnHelper<ShoppingListFormInput>();
 
 const columns = [
   columnHelper.accessor((row) => row.name, {
@@ -42,7 +42,7 @@ const columns = [
     cell: (props) => `$${props.getValue()}`,
     sortingFn: 'basic',
   }),
-  columnHelper.accessor((row) => row.total, {
+  columnHelper.display({
     id: 'total',
     header: 'Total',
     cell: (props) => `$${(props.row.original.price * props.row.original.qty).toFixed(2)}`,
@@ -81,7 +81,7 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
     return filtered;
   }, [data, categoryFilter, subcategoryFilter]);
 
-  const globalFilterFn: FilterFn<ShoppingListTableRows> = useMemo(
+  const globalFilterFn: FilterFn<ShoppingListFormInput> = useMemo(
     () => (row, _, filterValue) => {
       const search = filterValue.toLowerCase();
       const name = row.getValue('name')?.toString().toLowerCase() || '';

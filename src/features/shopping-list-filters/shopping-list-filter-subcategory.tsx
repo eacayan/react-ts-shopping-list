@@ -1,4 +1,4 @@
-import { ShoppingListTableRows } from '@/features/types';
+import { ShoppingListFormInput } from '@/features/types';
 import { DownOutlined } from '@ant-design/icons';
 import { useMemo } from 'react';
 
@@ -6,7 +6,7 @@ interface ShoppingListFilterSubcategoryProps {
   value: string;
   onChange: (value: string) => void;
   selectedCategory: string;
-  data: ShoppingListTableRows[];
+  data: ShoppingListFormInput[];
 }
 
 const ShoppingListFilterSubcategory: React.FC<ShoppingListFilterSubcategoryProps> = ({
@@ -16,7 +16,6 @@ const ShoppingListFilterSubcategory: React.FC<ShoppingListFilterSubcategoryProps
   data,
 }) => {
   const subcategories = useMemo(() => {
-    // console.log('data sub:>> ', data);
     const filteredData = selectedCategory
       ? data.filter((item) => item.category.toLowerCase() === selectedCategory.toLowerCase())
       : data;

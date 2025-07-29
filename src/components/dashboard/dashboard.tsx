@@ -31,8 +31,7 @@ const Dashboard: React.FC = () => {
   });
 
   const flatData = useMemo(() => data?.pages?.flatMap((page) => page.data) ?? [], [data]);
-  console.log('flat data :>> ', flatData);
-  const itemCount = flatData.length;
+  const itemCount = data?.pages?.[0]?.meta?.totalRowCount ?? 0;
 
   const handleCategoryChange = (category: string) => {
     setCategoryFilter(category);
