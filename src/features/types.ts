@@ -6,6 +6,7 @@ export const CATEGORIES = [
   'Meat',
   'Snacks',
   'Beverages',
+  'Bakery',
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -27,3 +28,17 @@ export interface ShoppingListTableRows {
   total: number;
   date: string;
 }
+
+export interface ShoppingListTableProps {
+  data: ShoppingListTableRows[];
+  globalFilter?: string;
+  categoryFilter?: string;
+  subcategoryFilter?: string;
+}
+
+export type ShoppingListApiResponse = {
+  data: ShoppingListTableRows[];
+  meta: {
+    totalRowCount: number;
+  };
+};
