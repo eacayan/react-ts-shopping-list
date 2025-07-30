@@ -1,12 +1,13 @@
 import { FETCH_SIZE, fetchData } from '@/api/helpers';
 import {
+  ExportToExcel,
   ShoppingListFilterCategory,
   ShoppingListFilterSubcategory,
   ShoppingListForm,
   ShoppingListSearch,
   ShoppingListTable,
 } from '@/features';
-import { ShoppingListApiResponse } from '@/features/types';
+import { ShoppingListApiResponse, TableExportProps } from '@/features/types';
 import { useMemo, useState } from 'react';
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
 import { SortingState } from '@tanstack/react-table';
@@ -15,13 +16,14 @@ const Dashboard: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [subcategoryFilter, setSubcategoryFilter] = useState('');
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [dataToExport, setDataToExport] = useState<TableExportProps[]>([]);
+  const [sorting] = useState<SortingState>([]);
 
-  const { data, fetchNextPage, isFetching, isLoading } = useInfiniteQuery<ShoppingListApiResponse>({
+  const { data } = useInfiniteQuery<ShoppingListApiResponse>({
     queryKey: ['item', sorting],
     queryFn: async ({ pageParam = 0 }) => {
       const start = (pageParam as number) * FETCH_SIZE;
-      const fetchedData = await fetchData(start, FETCH_SIZE, sorting); //pretend api call
+      const fetchedData = await fetchData(start); //pretend api call
       return fetchedData;
     },
     initialPageParam: 0,
@@ -43,8 +45,8 @@ const Dashboard: React.FC = () => {
       <ShoppingListForm />
       <div className='flex justify-between items-center w-full'>
         <h2 className='font-bold text-lg pl-4'>{itemCount} Items</h2>
-        <div className='flex gap-4 p-4'>
-          <p className=''>Filter By</p>
+        <div className='flex gap-4 pr-4'>
+          <p className='whitespace-nowrap self-center'>Filter By:</p>
           <ShoppingListFilterCategory value={categoryFilter} onChange={handleCategoryChange} />
           <ShoppingListFilterSubcategory
             value={subcategoryFilter}
@@ -53,6 +55,7 @@ const Dashboard: React.FC = () => {
             data={flatData}
           />
           <ShoppingListSearch value={globalFilter} onChange={setGlobalFilter} />
+          <ExportToExcel data={dataToExport} fileName='Shopping List Export' />
         </div>
       </div>
       <ShoppingListTable
@@ -60,6 +63,7 @@ const Dashboard: React.FC = () => {
         globalFilter={globalFilter}
         categoryFilter={categoryFilter}
         subcategoryFilter={subcategoryFilter}
+        onDataToExportChange={setDataToExport}
       />
     </section>
   );

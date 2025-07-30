@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 const columnHelper = createColumnHelper<ShoppingListFormInput>();
 
@@ -60,6 +60,7 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
   categoryFilter = '',
   subcategoryFilter = '',
   data,
+  onDataToExportChange,
 }) => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
@@ -78,8 +79,25 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
       );
     }
 
-    return filtered;
+    return filtered.map((item) => ({
+      ...item,
+      total: item.price * item.qty,
+    }));
   }, [data, categoryFilter, subcategoryFilter]);
+  const dataToExport = filteredData.map((item) => ({
+    Name: item.name,
+    Category: item.category,
+    'Sub Category': item.subcategory,
+    Price: item.price,
+    Quantity: item.qty,
+    Total: item.qty * item.price,
+    Date: item.date,
+  }));
+  useEffect(() => {
+    if (onDataToExportChange) {
+      onDataToExportChange(dataToExport);
+    }
+  }, [dataToExport, onDataToExportChange]);
 
   const globalFilterFn: FilterFn<ShoppingListFormInput> = useMemo(
     () => (row, _, filterValue) => {
@@ -121,7 +139,7 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
   const totalRowsCount = data.length;
 
   return (
-    <div className='p-4'>
+    <div className='mt-5'>
       {(globalFilter || categoryFilter || subcategoryFilter) && (
         <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
           Showing {filteredRowsCount} of {totalRowsCount} items
@@ -137,7 +155,7 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
       )}
 
       <div
-        className='overflow-y-auto relative h-[500px] rounded-lg border border-gray-200 dark:border-gray-700'
+        className='overflow-y-auto relative h-[500px] border border-gray-200 dark:border-gray-700'
         ref={tableContainerRef}
       >
         <table className='w-full table-fixed'>

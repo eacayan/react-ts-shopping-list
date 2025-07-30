@@ -1,5 +1,4 @@
 import { Category, ShoppingListFormInput } from '@/features/types';
-import { ColumnSort, SortingState } from '@tanstack/react-table';
 import mockData from '@/api/mock-data.json';
 
 export const FETCH_SIZE = 30;
@@ -38,24 +37,14 @@ function generateRandomDate(): string {
 
 const initialData = generateMockData(mockData as ShoppingListFormInput[], FETCH_SIZE);
 
-export const fetchData = async (start: number, size: number, sorting: SortingState) => {
+export const fetchData = async (start: number) => {
   const dbData = [...initialData];
-  if (sorting.length) {
-    const sort = sorting[0] as ColumnSort;
-    const { id, desc } = sort as { id: keyof ShoppingListFormInput; desc: boolean };
-    dbData.sort((a, b) => {
-      if (desc) {
-        return a[id] < b[id] ? 1 : -1;
-      }
-      return a[id] > b[id] ? 1 : -1;
-    });
-  }
 
   // simulate a backend api
   await new Promise((resolve) => setTimeout(resolve, 200));
 
   return {
-    data: dbData.slice(start, start + size),
+    data: dbData.slice(start, start + FETCH_SIZE),
     meta: {
       totalRowCount: dbData.length,
     },

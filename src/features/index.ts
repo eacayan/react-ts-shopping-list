@@ -8,9 +8,10 @@ import { ShoppingListSelect } from '@/features/shopping-list-form/shopping-list-
 import { ShoppingListInputName } from '@/features/shopping-list-form/shopping-list-input-name';
 import { ShoppingListInputNumber } from '@/features/shopping-list-form/shopping-list-input-number';
 import { ShoppingListInputDate } from '@/features/shopping-list-form/shopping-list-input-date';
+import { ExportToExcel } from '@/features/export-table/export-table';
 
 export {
-  ThemeToggle,
+  ExportToExcel,
   ShoppingListForm,
   ShoppingListSearch,
   ShoppingListTable,
@@ -20,4 +21,5 @@ export {
   ShoppingListInputName,
   ShoppingListInputNumber,
   ShoppingListInputDate,
+  ThemeToggle,
 };

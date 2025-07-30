@@ -24,6 +24,7 @@ export interface ShoppingListTableProps {
   globalFilter?: string;
   categoryFilter?: string;
   subcategoryFilter?: string;
+  onDataToExportChange?: (filtered: TableExportProps[]) => void;
 }
 
 export type ShoppingListApiResponse = {
@@ -32,3 +33,13 @@ export type ShoppingListApiResponse = {
     totalRowCount: number;
   };
 };
+
+export interface TableExportProps {
+  Name: string;
+  Category: string;
+  'Sub Category': string;
+  Price: number;
+  Quantity: number;
+  Total: number;
+  Date: string;
+}

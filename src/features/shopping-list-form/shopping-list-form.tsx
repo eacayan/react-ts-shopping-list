@@ -43,7 +43,7 @@ const ShoppingListForm: React.FC = () => {
         e.preventDefault();
         form.handleSubmit();
       }}
-      className='flex items-center gap-x-4 w-full py-6 px-10'
+      className='flex flex-wrap items-end gap-4 w-full py-6 px-10'
     >
       <form.Field
         name='name'
@@ -161,15 +161,11 @@ const ShoppingListForm: React.FC = () => {
       </form.Field>
       <button
         type='submit'
-        className='flex items-center gap-x-2 px-4  h-8 rounded-md bg-btn text-text-light'
+        className='flex items-center gap-x-2 px-4 h-10 rounded-md bg-btn text-text-light self-end'
       >
-        <PlusOutlined size={16} />
+        <PlusOutlined />
         <span className='text-sm font-bold'>Add Item</span>
       </button>
-
-      {/* <Button type='primary' icon={<PlusOutlined />} className='self-end !text-text-light'>
-        Add Item
-      </Button> */}
     </form>
   );
 };
