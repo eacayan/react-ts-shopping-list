@@ -18,7 +18,7 @@ const Dashboard: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [subcategoryFilter, setSubcategoryFilter] = useState('');
   const [sorting] = useState<SortingState>([]);
-  const { allData, setAllData, setFilteredData } = useShoppingListStore();
+  const { setAllData, setFilteredData } = useShoppingListStore();
 
   const { data } = useInfiniteQuery<ShoppingListApiResponse>({
     queryKey: ['item', sorting],

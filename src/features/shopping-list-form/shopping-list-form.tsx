@@ -5,7 +5,7 @@ import {
   ShoppingListSelect,
 } from '@/features';
 import { CATEGORIES, ShoppingListFormInput } from '@/features/types';
-import { useForm } from '@tanstack/react-form';
+import { ObjectValue, Updater, useForm } from '@tanstack/react-form';
 import mockData from '@/api/mock-data.json';
 import { PlusOutlined } from '@ant-design/icons';
 import { addMockItem } from '@/api/helpers';
@@ -72,7 +72,11 @@ const ShoppingListForm: React.FC = () => {
           <div className='flex flex-col gap-y-2'>
             <ShoppingListSelect
               value={field.state.value}
-              onChange={(e) => field.handleChange(e.target.value as any)}
+              onChange={(e) =>
+                field.handleChange(
+                  e.target.value as Updater<ObjectValue<never, ShoppingListFormInput, 'category'>>,
+                )
+              }
               options={CATEGORIES}
               label='Category'
             />

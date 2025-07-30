@@ -1,5 +1,4 @@
 import { ShoppingListTableProps, ShoppingListFormInput } from '@/features/types';
-import { useShoppingListStore } from '@/store/useShoppingListStore';
 import { ArrowDownOutlined, ArrowsAltOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import {
   createColumnHelper,
@@ -59,7 +58,6 @@ const columns = [
 
 const ShoppingListTable: React.FC<ShoppingListTableProps> = ({ globalFilter = '', data }) => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
-  const { allData, setAllData } = useShoppingListStore();
 
   const dataWithTotal = useMemo(() => {
     return data.map((item) => ({
