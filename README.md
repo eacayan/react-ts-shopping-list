@@ -16,7 +16,7 @@ A React TypeScript application for managing shopping lists with advanced filteri
 
 ### Prerequisites
 
-- Node.js (v16+)
+- Node.js (v20+)
 - npm or yarn
 
 ### Local Development
@@ -32,11 +32,12 @@ A React TypeScript application for managing shopping lists with advanced filteri
 2. **Start development server**
 
    ```bash
-   npm start
+   npm run dev
    ```
 
 3. **Open browser**
-   Navigate to `http://localhost:3000`
+
+    Navigate to `http://localhost:3000`
 
 ### Build for Production
 
