@@ -22,20 +22,18 @@ const ShoppingListFilterCategory: React.FC<ShoppingListFilterCategoryProps> = ({
         onChange={(e) => onChange(e.target.value)}
         className='
           appearance-none
-          bg-white dark:bg-[#1a1a1a]
+          bg-white dark:bg-dark
           border border-gray-300 dark:border-[#333]
           text-gray-900 dark:text-[#e5e5e5]
           rounded-lg
-          px-4 py-2.5 pr-10
-          text-base
+          px-4 py-2 pr-10
+          w-[200px]
+          text-sm
           cursor-pointer
           outline-none
           transition-colors
           hover:border-gray-400 dark:hover:border-[#555]
           focus:border-indigo-500 dark:focus:border-[#666]
-          focus:ring-0
-          min-w-[200px]
-          first-child:text-gray-500 dark:first-child:text-[#666]
         '
       >
         <option value='' className='text-gray-500 dark:text-[#666]'>
@@ -52,7 +50,7 @@ const ShoppingListFilterCategory: React.FC<ShoppingListFilterCategoryProps> = ({
         ))}
       </select>
       <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
-        <DownOutlined />
+        <DownOutlined className='w-3 h-[7px]' />
       </div>
     </div>
   );

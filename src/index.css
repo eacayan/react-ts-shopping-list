@@ -4,11 +4,128 @@
 
 @theme {
   --color-light: #ffffff;
-  --color-dark: #1a1d24;
+  --color-dark: #0d0d0d;
   --color-grey: #202020;
   --color-text-light: rgba(0, 0, 0, 0.88);
   --color-text-dark: #ffffff;
   --color-text-light-muted: rgba(0, 0, 0, 0.65);
   --color-text-dark-muted: rgba(255, 255, 255, 0.65);
   --color-btn: #3086ff;
+  --color-border: #333333;
+}
+
+/* Custom styles for the Ant Design modal */
+.custom-modal .ant-modal-content {
+  background-color: var(--color-light);
+  color: var(--color-text-light);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.dark .custom-modal .ant-modal-content {
+  background-color: var(--color-dark);
+  color: var(--color-text-dark);
+}
+
+.custom-modal .ant-modal-header {
+  background-color: transparent;
+}
+
+.dark .custom-modal .ant-modal-header {
+  background-color: transparent;
+}
+
+.custom-modal .ant-modal-title {
+  color: var(--color-text-light);
+}
+
+.dark .custom-modal .ant-modal-title {
+  color: var(--color-text-dark);
+}
+
+.custom-modal .ant-modal-close {
+  color: inherit;
+}
+
+/* Custom styles for Ant Design input number */
+.custom-input-number {
+  border: 1px solid var(--color-text-light-muted);
+  background-color: var(--color-light);
+  color: var(--color-text-light);
+  width: 180px;
+  height: 38px;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease;
+}
+.custom-input-number .ant-input-number-input-wrap {
+  height: 100%;
+}
+
+.custom-input-number .ant-input-number-input-wrap input {
+  height: 100%;
+}
+
+.dark .custom-input-number .ant-input-number-input-wrap input {
+  height: 100%;
+  color: var(--color-text-dark) !important;
+}
+
+.dark .custom-input-number {
+  background-color: var(--color-dark);
+  border-color: var(--color-grey);
+}
+
+.custom-input-number:hover {
+  border-color: #bfbfbf;
+}
+
+.dark .custom-input-number:hover {
+  border-color: #555;
+}
+
+.custom-input-number:focus-within {
+  border-color: #1677ff;
+  box-shadow: none;
+}
+
+/* Custom styles for Ant Design date picker */
+.custom-date-picker {
+  border: 1px solid var(--color-text-light-muted);
+  background-color: var(--color-light);
+  color: var(--color-text-light);
+  width: 160px;
+  height: 38px;
+  border-radius: 0.5rem;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease;
+}
+
+.custom-date-picker .ant-picker-input > input {
+  color: var(--color-text-light);
+}
+
+.dark .custom-date-picker {
+  background-color: var(--color-dark);
+  border-color: var(--color-grey);
+  color: var(--color-text-dark);
+}
+
+.dark .custom-date-picker .ant-picker-input > input {
+  color: var(--color-text-dark);
+}
+
+.custom-date-picker:hover {
+  border-color: #bfbfbf;
+}
+
+.dark .custom-date-picker:hover {
+  border-color: #555;
+}
+
+.custom-date-picker:focus-within,
+.custom-date-picker.ant-picker-focused {
+  border-color: var(--color-btn);
+  box-shadow: none;
 }

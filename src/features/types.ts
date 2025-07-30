@@ -22,9 +22,6 @@ export interface ShoppingListFormInput {
 export interface ShoppingListTableProps {
   data: ShoppingListFormInput[];
   globalFilter?: string;
-  categoryFilter?: string;
-  subcategoryFilter?: string;
-  onDataToExportChange?: (filtered: TableExportProps[]) => void;
 }
 
 export type ShoppingListApiResponse = {

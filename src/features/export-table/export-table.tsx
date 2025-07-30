@@ -22,7 +22,7 @@ const ExportToExcel: React.FC<ExportToExcelProps> = ({ data, fileName }) => {
     <button
       className='
         appearance-none
-        bg-white dark:bg-[#1a1a1a]
+        bg-white dark:bg-dark
         border border-gray-300 dark:border-[#333]
         text-gray-900 dark:text-[#e5e5e5]
         rounded-lg

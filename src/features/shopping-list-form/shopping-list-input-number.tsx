@@ -1,6 +1,8 @@
+import { InputNumber } from 'antd';
+
 interface ShoppingListInputNumberProps {
   value: number | string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: number | null) => void;
   label: string;
 }
 
@@ -14,28 +16,14 @@ const ShoppingListInputNumber: React.FC<ShoppingListInputNumberProps> = ({
       <label htmlFor={label} className='text-sm'>
         {label}
       </label>
-      <input
-        type='number'
+      <InputNumber
         id={label}
-        name={label}
-        value={value}
+        value={value as number}
+        defaultValue={0}
         onChange={onChange}
-        className='
-        appearance-none
-        bg-white dark:bg-[#1a1a1a]
-        border border-gray-300 dark:border-[#333]
-        text-gray-900 dark:text-[#e5e5e5]
-        rounded-lg
-        px-4 py-2 pr-10
-        w-[200px]
-        text-sm
-        outline-none
-        transition-colors
-        hover:border-gray-400 dark:hover:border-[#555]
-        focus:border-indigo-500 dark:focus:border-[#666]
-        focus:ring-0
-        first-child:text-gray-500 dark:first-child:text-[#666]
-      '
+        min={0}
+        controls={false}
+        className='custom-input-number'
       />
     </div>
   );

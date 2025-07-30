@@ -1,4 +1,6 @@
 import { ShoppingListTableProps, ShoppingListFormInput } from '@/features/types';
+import { useShoppingListStore } from '@/store/useShoppingListStore';
+import { ArrowDownOutlined, ArrowsAltOutlined, ArrowUpOutlined } from '@ant-design/icons';
 import {
   createColumnHelper,
   FilterFn,
@@ -9,7 +11,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 const columnHelper = createColumnHelper<ShoppingListFormInput>();
 
@@ -18,7 +20,7 @@ const columns = [
     id: 'name',
     header: 'Item Name',
     cell: (props) => props.getValue(),
-    sortingFn: 'alphanumeric',
+    sortingFn: 'alphanumericCaseSensitive',
   }),
   columnHelper.accessor((row) => row.category, {
     id: 'category',
@@ -55,49 +57,16 @@ const columns = [
   }),
 ];
 
-const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
-  globalFilter = '',
-  categoryFilter = '',
-  subcategoryFilter = '',
-  data,
-  onDataToExportChange,
-}) => {
+const ShoppingListTable: React.FC<ShoppingListTableProps> = ({ globalFilter = '', data }) => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
+  const { allData, setAllData } = useShoppingListStore();
 
-  const filteredData = useMemo(() => {
-    let filtered = [...data];
-
-    if (categoryFilter) {
-      filtered = filtered.filter(
-        (item) => item.category.toLowerCase() === categoryFilter.toLowerCase(),
-      );
-    }
-
-    if (subcategoryFilter) {
-      filtered = filtered.filter(
-        (item) => item.subcategory.toLowerCase() === subcategoryFilter.toLowerCase(),
-      );
-    }
-
-    return filtered.map((item) => ({
+  const dataWithTotal = useMemo(() => {
+    return data.map((item) => ({
       ...item,
       total: item.price * item.qty,
     }));
-  }, [data, categoryFilter, subcategoryFilter]);
-  const dataToExport = filteredData.map((item) => ({
-    Name: item.name,
-    Category: item.category,
-    'Sub Category': item.subcategory,
-    Price: item.price,
-    Quantity: item.qty,
-    Total: item.qty * item.price,
-    Date: item.date,
-  }));
-  useEffect(() => {
-    if (onDataToExportChange) {
-      onDataToExportChange(dataToExport);
-    }
-  }, [dataToExport, onDataToExportChange]);
+  }, [data]);
 
   const globalFilterFn: FilterFn<ShoppingListFormInput> = useMemo(
     () => (row, _, filterValue) => {
@@ -109,7 +78,7 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
   );
 
   const table = useReactTable({
-    data: filteredData,
+    data: dataWithTotal,
     columns: columns,
     debugTable: true,
     getCoreRowModel: getCoreRowModel(),
@@ -140,17 +109,9 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
 
   return (
     <div className='mt-5'>
-      {(globalFilter || categoryFilter || subcategoryFilter) && (
+      {globalFilter && (
         <div className='mb-4 text-sm text-gray-600 dark:text-gray-400'>
           Showing {filteredRowsCount} of {totalRowsCount} items
-          {filteredRowsCount === 0 && (
-            <span className='ml-2 text-yellow-600 dark:text-yellow-400'>
-              No items found
-              {globalFilter && ` matching "${globalFilter}"`}
-              {categoryFilter && ` in category "${categoryFilter}"`}
-              {subcategoryFilter && ` with subcategory "${subcategoryFilter}"`}
-            </span>
-          )}
         </div>
       )}
 
@@ -159,7 +120,7 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
         ref={tableContainerRef}
       >
         <table className='w-full table-fixed'>
-          <thead className='bg-gray-50 dark:bg-gray-800 sticky top-0 z-10'>
+          <thead className='bg-gray-50 dark:bg-[#1c1c1c] sticky top-0 z-10'>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -168,15 +129,17 @@ const ShoppingListTable: React.FC<ShoppingListTableProps> = ({
                     className='text-left pl-4 pr-2 py-3 font-medium text-gray-700 dark:text-gray-300'
                   >
                     <div
-                      className='flex items-center gap-2 cursor-pointer hover:text-primary transition-colors'
+                      className='flex items-center justify-between gap-2 cursor-pointer hover:text-primary transition-colors'
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       <span className='text-gray-400'>
                         {{
-                          asc: '↑',
-                          desc: '↓',
-                        }[header.column.getIsSorted() as string] ?? ''}
+                          asc: <ArrowUpOutlined className='w-3 h-3' />,
+                          desc: <ArrowDownOutlined className='w-3 h-3' />,
+                        }[header.column.getIsSorted() as string] ?? (
+                          <ArrowsAltOutlined className='w-3 h-3' />
+                        )}
                       </span>
                     </div>
                   </th>

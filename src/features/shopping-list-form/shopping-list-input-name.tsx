@@ -15,9 +15,10 @@ const ShoppingListInputName: React.FC<ShoppingListInputNameProps> = ({ value, on
         name='name'
         value={value}
         onChange={onChange}
+        placeholder='Enter Item Name'
         className='
         appearance-none
-        bg-white dark:bg-[#1a1a1a]
+        bg-white dark:bg-dark
         border border-gray-300 dark:border-[#333]
         text-gray-900 dark:text-[#e5e5e5]
         rounded-lg

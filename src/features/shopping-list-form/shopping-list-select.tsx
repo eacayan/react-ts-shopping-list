@@ -20,18 +20,18 @@ const ShoppingListSelect: React.FC<ShoppingListSelectProps> = ({
         {label}
       </label>
       <select
-        name='category'
-        id='category'
+        name={label}
+        id={label}
         value={value}
         onChange={onChange}
         className='
           appearance-none
-          bg-white dark:bg-[#1a1a1a]
+          bg-white dark:bg-dark
           border border-gray-300 dark:border-[#333]
           text-gray-900 dark:text-[#e5e5e5]
           rounded-lg
           px-4 py-2 pr-10
-          w-[200px]
+          w-[180px]
           text-sm
           cursor-pointer
           outline-none

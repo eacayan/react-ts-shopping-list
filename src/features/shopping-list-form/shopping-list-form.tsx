@@ -29,8 +29,7 @@ const ShoppingListForm: React.FC = () => {
       date: '',
     } as ShoppingListFormInput,
     onSubmit: ({ value }) => {
-      console.log('value :>> ', value);
-      mutation.mutate(value); // automatically calls invalidate on success
+      mutation.mutate(value);
       form.reset();
     },
   });
@@ -113,7 +112,7 @@ const ShoppingListForm: React.FC = () => {
           <div className='flex flex-col gap-y-2'>
             <ShoppingListInputNumber
               value={field.state.value}
-              onChange={(e) => field.handleChange(e.target.valueAsNumber)}
+              onChange={(value) => field.handleChange(value ?? 0)}
               label='Price'
             />
             {field.state.meta.errors.length > 0 && (
@@ -132,7 +131,7 @@ const ShoppingListForm: React.FC = () => {
           <div className='flex flex-col gap-y-2'>
             <ShoppingListInputNumber
               value={field.state.value}
-              onChange={(e) => field.handleChange(e.target.valueAsNumber)}
+              onChange={(value) => field.handleChange(value ?? 0)}
               label='Quantity'
             />
             {field.state.meta.errors.length > 0 && (
@@ -151,7 +150,7 @@ const ShoppingListForm: React.FC = () => {
           <div className='flex flex-col gap-y-2'>
             <ShoppingListInputDate
               value={field.state.value}
-              onChange={(e) => field.handleChange(e.target.value)}
+              onChange={(value) => field.handleChange(value)}
             />
             {field.state.meta.errors.length > 0 && (
               <em className='text-red-500 text-xs'>{field.state.meta.errors.join(', ')}</em>
