@@ -12,6 +12,7 @@
   --color-text-dark-muted: rgba(255, 255, 255, 0.65);
   --color-btn: #3086ff;
   --color-border: #333333;
+  --color-border-dark: #d9d9d9;
 }
 
 /* Custom styles for the Ant Design modal */
@@ -49,7 +50,7 @@
 
 /* Custom styles for Ant Design input number */
 .custom-input-number {
-  border: 1px solid var(--color-text-light-muted);
+  border: 1px solid var(--color-border-dark);
   background-color: var(--color-light);
   color: var(--color-text-light);
   width: 180px;
@@ -91,7 +92,7 @@
 
 /* Custom styles for Ant Design date picker */
 .custom-date-picker {
-  border: 1px solid var(--color-text-light-muted);
+  border: 1px solid var(--color-border-dark);
   background-color: var(--color-light);
   color: var(--color-text-light);
   width: 160px;
@@ -102,17 +103,9 @@
   transition: border-color 0.2s ease;
 }
 
-.custom-date-picker .ant-picker-input > input {
-  color: var(--color-text-light);
-}
-
 .dark .custom-date-picker {
   background-color: var(--color-dark);
   border-color: var(--color-grey);
-  color: var(--color-text-dark);
-}
-
-.dark .custom-date-picker .ant-picker-input > input {
   color: var(--color-text-dark);
 }
 
@@ -128,4 +121,46 @@
 .custom-date-picker.ant-picker-focused {
   border-color: var(--color-btn);
   box-shadow: none;
+}
+
+/* Custom styles for Ant Design select */
+.custom-ant-select {
+  height: 38px;
+}
+.custom-ant-select .ant-select-selector {
+  background-color: var(--color-light);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-text-light);
+  border-radius: 0.5rem;
+  padding: 6px 12px;
+  transition: border-color 0.2s;
+}
+
+.dark .custom-ant-select .ant-select-selector {
+  background-color: var(--color-dark);
+  border-color: #333;
+  color: var(--color-text-dark);
+}
+
+.custom-ant-select .ant-select-selection-placeholder {
+  color: var(--color-text-light-muted);
+}
+
+.dark .custom-ant-select .ant-select-selection-placeholder {
+  color: var(--color-text-dark-muted);
+}
+.custom-ant-select .ant-select-selector:hover {
+  border-color: gray;
+}
+
+.dark .custom-ant-select .ant-select-selector:hover {
+  border-color: #555;
+}
+
+.custom-ant-select .ant-select-arrow {
+  color: var(--color-text-light-muted);
+}
+
+.dark .custom-ant-select .ant-select-arrow {
+  color: var(--color-text-dark-muted);
 }
